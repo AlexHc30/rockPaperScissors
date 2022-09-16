@@ -40,12 +40,12 @@ function game(playerOption) {
 }
 
 function gameOver(playerScore, computerScore) {
+    const finalResult = document.querySelector('.finalResult');
+
     if (playerScore > computerScore) {
-        alert(`Game Over! Player has won the tournament ${playerScore} to ${computerScore}!`);
-    } else if (computerScore > playerScore) {
-        alert(`Game Over! Computer has won the tournament ${computerScore} to ${playerScore}!`);
+        finalResult.innerText = `Game Over! Player has won the tournament ${playerScore} to ${computerScore}!`;
     } else {
-        alert(`Game Over! Player has won the tournament ${computerScore} to ${playerScore}!`);
+        finalResult.innerText = `Game Over! Computer has won the tournament ${computerScore} to ${playerScore}!`;
     }
 
     const restartButton = document.querySelector('.restart');
