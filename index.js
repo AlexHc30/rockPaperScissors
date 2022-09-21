@@ -1,27 +1,23 @@
 const playerName = prompt('Please write your name');
 const buttons = document.querySelectorAll('button');
-buttons.forEach(button => button.addEventListener('click', game))
+buttons.forEach(button => button.addEventListener('click', playGame))
 const weapons = ["rock", "paper", "scissors"]
 let playerScore = 0;
 let computerScore = 0;
 
-function computerPlay() {
+function getComputerOption() {
     return weapons[Math.floor(Math.random() * weapons.length)];
 }
 
-function game(playerOption) {
+function playGame(playerOption) {
     let playerSelection = weapons[playerOption.target.value];
-    console.log(playerSelection)
-    console.log(playerOption.target.value)
-    let computerSelection = computerPlay();
+    let computerSelection = getComputerOption();
 
     const pScore = document.querySelector('.playerScore');
-    // pScore.innerText = `${playerName} score: ${playerScore}`;
     const cScore = document.querySelector('.computerScore');
-    // cScore.innerText = `Computer score: ${computerScore}`;
     const roundMessage = document.querySelector('.roundMessage');
-
     let roundResult = "";
+
     const playerWon = (playerSelection === 'rock' && computerSelection === 'scissors') || 
         (playerSelection === 'paper' && computerSelection === 'rock') ||
         (playerSelection === 'scissors' && computerSelection === 'paper');
@@ -40,12 +36,12 @@ function game(playerOption) {
     cScore.innerText = `Computer score: ${computerScore}`;
 
     if(playerScore === 5 || computerScore === 5) {
-        buttons.forEach(button => button.removeEventListener('click', game))
-        gameOver(playerScore, computerScore);
+        buttons.forEach(button => button.removeEventListener('click', playGame))
+        finishGame(playerScore, computerScore);
     }
 }
 
-function gameOver(playerScore, computerScore) {
+function finishGame(playerScore, computerScore) {
     const finalResult = document.querySelector('.finalResult');
 
     if (playerScore > computerScore) {
@@ -56,5 +52,5 @@ function gameOver(playerScore, computerScore) {
 
     const restartButton = document.querySelector('.restart');
     restartButton.style.display = 'block';
-    restartButton.onclick = () => location.reload()
+    restartButton.onclick = () => location.reload();
 }
